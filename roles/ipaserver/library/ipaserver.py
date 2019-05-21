@@ -55,9 +55,9 @@ options:
     description: The password for the Directory Manager
     required: true
 
-#  ip_addresses:
-#    description: Master Server IP Addresses
-#    required: false
+  ip_addresses:
+    description: Master Server IP Addresses
+    required: false
 #  hostname:
 #    description: Fully qualified name of this host
 #    required: false
@@ -250,7 +250,7 @@ def main():
             # basic
             dm_password=dict(required=False, no_log=True),
             password=dict(required=False, no_log=True),
-#            ip_addresses=dict(required=False, type='list'),
+            ip_addresses=dict(required=False, type='list'),
             domain=dict(required=True),
             realm=dict(required=True),
 #            hostname=dict(required=False),
@@ -318,7 +318,7 @@ def main():
     password = module.params.get('password')
     dm_password = module.params.get('dm_password')
 
-    #ip_addresses = module.params.get('ip_addresses')
+    ip_addresses = module.params.get('ip_addresses')
     #hostname = module.params.get('hostname')
 
     mkhomedir = module.params.get('mkhomedir')
@@ -397,8 +397,8 @@ def main():
             "--realm", realm,
         ]
 
-        #for ip in ip_addresses:
-        #    cmd.append("--ip-address=%s" % ip)
+        for ip in ip_addresses:
+            cmd.append("--ip-address=%s" % ip)
         #if hostname:
         #    cmd.append("--hostname=%s" % hostname)
 
